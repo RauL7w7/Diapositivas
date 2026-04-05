@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observación del Gerente - Presentación Completa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .slides-container {
+            position: relative;
+            min-height: 620px;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 45px 55px;
+            animation: fadeIn 0.4s ease;
+            background: #ffffff;
+            min-height: 620px;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background: #1e293b;
+            color: white;
+        }
+
+        .nav-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
+
+        .nav-btn:disabled {
+            background: #64748b;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-size: 15px;
+            background: #334155;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px;
+            background: #f1f5f9;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #3b82f6;
+            width: 32px;
+            border-radius: 10px;
+        }
+
+        /* TIPOGRAFÍA MEJORADA */
+        h1 {
+            font-size: 2.8em;
+            color: #0f172a;
+            margin-bottom: 25px;
+            border-left: 6px solid #3b82f6;
+            padding-left: 25px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #1e293b;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+
+        h2 i {
+            margin-right: 15px;
+            color: #3b82f6;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: #1e40af;
+            margin: 20px 0 12px 0;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: 1.02em;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .card {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .card h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1em;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+            font-size: 1.02em;
+        }
+
+        td {
+            background: white;
+            color: #334155;
+        }
+
+        .strobe-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .strobe-item {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 16px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1em;
+        }
+
+        .strobe-item i {
+            font-size: 1.5em;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 5px 14px;
+            border-radius: 25px;
+            font-size: 13px;
+            margin-right: 12px;
+            font-weight: 600;
+        }
+
+        /* PASOS MEJORADOS */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .step-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 5px solid #3b82f6;
+        }
+
+        .step-number {
+            background: #3b82f6;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 0.95em;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .comparison-chart {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .chart-card {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .chart-bar-container {
+            background: #e2e8f0;
+            border-radius: 20px;
+            height: 180px;
+            width: 80px;
+            margin: 0 auto 15px;
+            position: relative;
+        }
+
+        .bar-time {
+            background: #ef4444;
+            width: 100%;
+            height: 75%;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .bar-event {
+            background: #10b981;
+            width: 100%;
+            height: 45%;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .quote {
+            background: #1e293b;
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            font-style: italic;
+            margin: 25px 0;
+        }
+
+        .icon-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .icon-item {
+            text-align: center;
+            width: 140px;
+        }
+
+        .icon-item i {
+            font-size: 2.5em;
+            color: #3b82f6;
+            margin-bottom: 12px;
+        }
+
+        .icon-item p {
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="presentation-container">
+    <div class="slides-container">
+        <!-- Diapositiva 1 - Portada -->
+        <div class="slide active" id="slide1">
+            <div style="text-align: center;">
+                <i class="fas fa-chalkboard-user" style="font-size: 4.5em; color: #3b82f6; margin-bottom: 25px;"></i>
+                <h1 style="border-left: none; text-align: center;">Observación del Gerente<br>en la Toma de Decisiones</h1>
+                <div class="highlight" style="text-align: center; background: #dbeafe; border-left-color: #3b82f6;">
+                    <i class="fas fa-chart-line"></i> <strong>Métodos y herramientas para analistas de sistemas</strong>
+                    <p style="margin-top: 10px;"><i class="fas fa-search"></i> ¿Cómo observar realmente el trabajo del gerente típico?</p>
+                </div>
+                <div class="icon-row">
+                    <div class="icon-item"><i class="fas fa-eye"></i><p>Observación Directa</p></div>
+                    <div class="icon-item"><i class="fas fa-clipboard-list"></i><p>STROBE</p></div>
+                    <div class="icon-item"><i class="fas fa-chart-simple"></i><p>Muestreo</p></div>
+                    <div class="icon-item"><i class="fas fa-building"></i><p>Ambiente Físico</p></div>
+                </div>
+                <div class="quote" style="background: #2563eb;">
+                    <i class="fas fa-quote-left"></i> "No basta con preguntar, hay que observar." <i class="fas fa-quote-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 2 - ¿Por qué observar? -->
+        <div class="slide" id="slide2">
+            <h2><i class="fas fa-question-circle"></i> ¿Por qué observar a los gerentes?</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h4 style="color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> El problema</h4>
+                    <p>Los gerentes trabajan con <strong>interrupciones constantes</strong> y tareas cortas.</p>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <i class="fas fa-bell" style="font-size: 2.2em; color: #dc2626;"></i>
+                        <i class="fas fa-bell" style="font-size: 2.2em; color: #dc2626;"></i>
+                        <i class="fas fa-bell" style="font-size: 2.2em; color: #dc2626;"></i>
+                    </div>
+                    <p>Entrevistas y cuestionarios <strong>no son suficientes</strong> para entender cómo toman decisiones.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #10b981;"><i class="fas fa-check-circle"></i> La solución</h4>
+                    <p>La <strong>observación directa</strong> permite ver cómo realmente:</p>
+                    <ul style="margin-top: 15px;">
+                        <li><i class="fas fa-database"></i> Recopilan información</li>
+                        <li><i class="fas fa-share-alt"></i> Comparten datos</li>
+                        <li><i class="fas fa-cogs"></i> Usan la información para trabajar</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight">
+                <i class="fas fa-lightbulb"></i> <strong>Dato clave:</strong> El día de un gerente típico es una serie de pequeñas ráfagas de trabajo con múltiples interrupciones.
+            </div>
+        </div>
+
+        <!-- Diapositiva 3 - 5 Pasos -->
+        <div class="slide" id="slide3">
+            <h2><i class="fas fa-list-ol"></i> 5 pasos para observar actividades de decisión</h2>
+            <div class="steps-container">
+                <div class="step-card"><div class="step-number">1</div><div class="step-content"><div class="step-title">Decidir <strong>QUÉ</strong> va a ser observado</div><div class="step-desc">Definir específicamente qué comportamientos, procesos o decisiones se van a estudiar.</div></div></div>
+                <div class="step-card"><div class="step-number">2</div><div class="step-content"><div class="step-title">Decidir el <strong>NIVEL DE DETALLE</strong></div><div class="step-desc">Determinar qué tan específica o general será la observación (micro o macro).</div></div></div>
+                <div class="step-card"><div class="step-number">3</div><div class="step-content"><div class="step-title">Crear <strong>CATEGORÍAS</strong></div><div class="step-desc">Establecer categorías que capturen adecuadamente las actividades principales.</div></div></div>
+                <div class="step-card"><div class="step-number">4</div><div class="step-content"><div class="step-title">Preparar <strong>HERRAMIENTAS</strong></div><div class="step-desc">Preparar escalas, listas de verificación y otros materiales para la observación.</div></div></div>
+                <div class="step-card"><div class="step-number">5</div><div class="step-content"><div class="step-title">Decidir <strong>CUÁNDO</strong> observar</div><div class="step-desc">Definir el momento de observación (muestreo de tiempos o muestreo de eventos).</div></div></div>
+            </div>
+            <div class="highlight"><i class="fas fa-toolbox"></i> <strong>Herramientas útiles:</strong> Escalas LIKERT, listas de verificación, guion del analista.</div>
+        </div>
+
+        <!-- Diapositiva 4 - Muestreo -->
+        <div class="slide" id="slide4">
+            <h2><i class="fas fa-chart-bar"></i> Tipos de muestreo</h2>
+            <div class="comparison-chart">
+                <div class="chart-card"><i class="fas fa-clock" style="font-size: 2.5em; color: #ef4444;"></i><h3>Muestreo de tiempos</h3><div class="chart-bar-container"><div class="bar-time"></div></div><p><strong>Observa en intervalos fijos</strong></p><p style="font-size: 0.9em;">✓ Muestra representativa<br>✗ Pierde decisiones poco frecuentes</p></div>
+                <div class="chart-card"><i class="fas fa-calendar-check" style="font-size: 2.5em; color: #10b981;"></i><h3>Muestreo de eventos</h3><div class="chart-bar-container"><div class="bar-event"></div></div><p><strong>Observa comportamiento completo</strong></p><p style="font-size: 0.9em;">✓ Capta decisiones importantes<br>✗ Consume mucho tiempo</p></div>
+            </div>
+            <div class="highlight"><i class="fas fa-star"></i> <strong>Recomendación:</strong> combinar ambos métodos si es posible.</div>
+        </div>
+
+        <!-- Diapositiva 5 - Lenguaje corporal -->
+        <div class="slide" id="slide5">
+            <h2><i class="fas fa-user-astronaut"></i> Observación del lenguaje corporal</h2>
+            <div class="grid-2">
+                <div><p><strong><i class="fas fa-question"></i> ¿Por qué es importante?</strong></p><ul><li>Añade una <strong>dimensión extra</strong> a lo que el gerente dice o hace.</li><li>Ayuda a detectar <strong>requerimientos de información no expresados</strong>.</li></ul><div style="text-align: center; margin: 25px 0;"><i class="fas fa-smile" style="font-size: 2.2em;"></i> <i class="fas fa-frown" style="font-size: 2.2em;"></i> <i class="fas fa-meh" style="font-size: 2.2em;"></i></div></div>
+                <div class="card"><h4><i class="fas fa-tools"></i> Herramientas</h4><ul><li><span class="badge">1</span> <strong>Pares de adjetivos</strong></li><li><span class="badge">2</span> <strong>Sistema de categorías</strong></li><li><span class="badge">3</span> <strong>Guion del analista</strong></li></ul></div>
+            </div>
+            <div class="highlight"><i class="fas fa-globe"></i> ⚠️ El lenguaje corporal varía entre culturas. No generalizar.</div>
+        </div>
+
+        <!-- Diapositiva 6 - Guion del analista -->
+        <div class="slide" id="slide6">
+            <h2><i class="fas fa-scroll"></i> El guion del analista</h2>
+            <p><strong>¿Qué es?</strong> Registro donde el <strong>ACTOR</strong> (gerente) se documenta "actuando".</p>
+            <div class="highlight"><i class="fas fa-edit"></i> <strong>Formato:</strong> Columna izquierda: actor / Columna derecha: acciones con <strong>verbo</strong></div>
+            <table><thead><tr><th>Actor (Gerente)</th><th>Acción observada</th></tr></thead>
+                <tbody><tr><td>Gerente de ventas</td><td>Revisa informe de ingresos</td></tr><tr><td>Gerente de ventas</td><td>Llama al jefe de región</td></tr><tr><td>Gerente de ventas</td><td>Anota en una libreta</td></tr></tbody>
+            </table>
+            <div class="highlight"><i class="fas fa-bullseye"></i> <strong>Utilidad:</strong> Identifica decisiones frecuentes o clave.</div>
+        </div>
+
+        <!-- Diapositiva 7 - STROBE -->
+        <div class="slide" id="slide7">
+            <h2><i class="fas fa-building"></i> Observación del ambiente físico (STROBE)</h2>
+            <div class="card" style="text-align: center; background:#dbeafe;"><i class="fas fa-cube" style="font-size:3em; color:#2563eb;"></i><p><strong>STROBE</strong> = Structured Observation of the Environment</p></div>
+            <p><strong>Propósito:</strong> Confirmar o negar lo dicho en entrevistas.</p>
+            <div class="highlight"><i class="fas fa-check-circle"></i> <strong>Características:</strong> Metodología estándar, aplicable por otros analistas, limitada al ciclo actual.</div>
+        </div>
+
+        <!-- Diapositiva 8 - Elementos STROBE -->
+        <div class="slide" id="slide8">
+            <h2><i class="fas fa-list-ul"></i> Elementos STROBE</h2>
+            <div class="strobe-list"><div class="strobe-item"><i class="fas fa-map-marker-alt"></i> 1. Ubicación de la oficina</div><div class="strobe-item"><i class="fas fa-chair"></i> 2. Ubicación del escritorio</div><div class="strobe-item"><i class="fas fa-folder-open"></i> 3. Equipo fijo</div><div class="strobe-item"><i class="fas fa-calculator"></i> 4. Propiedades pequeñas</div><div class="strobe-item"><i class="fas fa-newspaper"></i> 5. Revistas y periódicos</div><div class="strobe-item"><i class="fas fa-lightbulb"></i> 6. Iluminación y color</div><div class="strobe-item"><i class="fas fa-tshirt"></i> 7. Vestimenta</div></div>
+            <div class="highlight">Cada elemento da pistas sobre cómo recopila, procesa, almacena y usa información.</div>
+        </div>
+
+        <!-- Diapositiva 9 - Análisis de fotografías -->
+        <div class="slide" id="slide9">
+            <h2><i class="fas fa-camera"></i> Alternativa 1 – Análisis de fotografías</h2>
+            <div style="text-align:center;"><i class="fas fa-camera-retro" style="font-size:3.5em;"></i> → <i class="fas fa-chart-pie" style="font-size:3.5em;"></i></div>
+            <div class="grid-2"><div class="card"><h4 style="color:#10b981;">✓ Ventajas</h4><ul><li>Documento reusable</li><li>Capta detalles</li><li>Compara organizaciones</li></ul></div><div class="card"><h4 style="color:#dc2626;">✗ Desventajas</h4><ul><li>Difícil decidir qué fotografiar</li><li>Inicialmente obstructivo</li></ul></div></div>
+        </div>
+
+        <!-- Diapositiva 10 - Escala LIKERT -->
+        <div class="slide" id="slide10">
+            <h2><i class="fas fa-chart-line"></i> Alternativa 2 – Escala LIKERT</h2>
+            <div class="card" style="text-align:center;"><p><strong>Escala de 5 puntos</strong></p><div style="font-size:2.5em;">① ② ③ ④ ⑤</div><div class="highlight"><strong>Ejemplo:</strong> "El escritorio está orientado para recibir visitas"<br>① Totalmente en desacuerdo → ⑤ Totalmente de acuerdo</div></div>
+        </div>
+
+        <!-- Diapositiva 11 - Lista anecdótica -->
+        <div class="slide" id="slide11">
+            <h2><i class="fas fa-list-check"></i> Alternativa 3 – Lista anecdótica</h2>
+            <p><strong>Propósito:</strong> Comparar narrativa organizacional (entrevistas) con observación (STROBE).</p>
+            <div class="steps-container"><div class="step-card"><div class="step-number">1</div><div class="step-content"><div class="step-title">Temas de entrevistas</div></div></div><div class="step-card"><div class="step-number">2</div><div class="step-content"><div class="step-title">Construir matriz</div></div></div><div class="step-card"><div class="step-number">3</div><div class="step-content"><div class="step-title">Usar 5 símbolos</div></div></div><div class="step-card"><div class="step-number">4</div><div class="step-content"><div class="step-title">Documentar y analizar</div></div></div></div>
+            <div class="highlight" style="text-align:center;">✓ = coincide &nbsp;&nbsp; ✗ = contradice &nbsp;&nbsp; ? = dudoso</div>
+            <div class="quote">"Lo que el gerente dice y lo que hace pueden ser diferentes. La observación reduce esa brecha."</div>
+        </div>
+
+        <!-- Diapositiva 12 - Resumen -->
+        <div class="slide" id="slide12">
+            <h2><i class="fas fa-graduation-cap"></i> Resumen final</h2>
+            <div class="grid-2"><div class="card"><h4>Claves para el analista</h4><ul><li>✅ La observación complementa entrevistas</li><li>✅ Elegir muestreo según objetivo</li><li>✅ Usar guion del analista</li><li>✅ Aplicar STROBE</li><li>✅ Apoyarse en fotografías, LIKERT o listas anecdóticas</li></ul></div><div style="text-align:center;"><i class="fas fa-chalkboard-user" style="font-size:4em; color:#3b82f6;"></i><div class="highlight" style="margin-top:20px;">🚀 La observación estructurada descubre necesidades reales de información.</div></div></div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn"><i class="fas fa-arrow-left"></i> Anterior</button>
+        <span class="slide-counter" id="slideCounter">Diapositiva 1 / 12</span>
+        <button class="nav-btn" id="nextBtn">Siguiente <i class="fas fa-arrow-right"></i></button>
+    </div>
+    <div class="dots" id="dotsContainer"></div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideCounter = document.getElementById('slideCounter');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlide);
+        });
+        slideCounter.textContent = `Diapositiva ${currentSlide + 1} / ${totalSlides}`;
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+        
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function changeSlide(direction) {
+        const newSlide = currentSlide + direction;
+        if (newSlide >= 0 && newSlide < totalSlides) {
+            currentSlide = newSlide;
+            updateSlides();
+        }
+    }
+
+    function goToSlide(index) {
+        if (index >= 0 && index < totalSlides) {
+            currentSlide = index;
+            updateSlides();
+        }
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => changeSlide(-1));
+    nextBtn.addEventListener('click', () => changeSlide(1));
+
+    // Crear dots
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === currentSlide) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+
+    // Teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        else if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    updateSlides();
+</script>
+</body>
+</html>
